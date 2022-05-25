@@ -1,6 +1,6 @@
 package eu.door.daaissuer.service;
 
-import eu.door.daaissuer.payload.TestDto;
+import eu.door.daaissuer.model.TestDto;
 import org.springframework.stereotype.Component;
 
 @Component

@@ -1,4 +1,4 @@
-package eu.door.daaissuer.payload;
+package eu.door.daaissuer.model;
 
 
 import java.io.Serializable;

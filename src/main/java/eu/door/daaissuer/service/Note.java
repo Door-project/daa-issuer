@@ -8,6 +8,7 @@ public class Note {
     private Map<String, String> data;
     private String image;
 
+    public Note(){}
 
     public String getSubject() {
         return subject;
