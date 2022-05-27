@@ -2,18 +2,16 @@ package eu.door.daaissuer.model;
 
 public class DaaRegister {
     private byte[] signedTpmNonce;
-    private byte[] P_EK;
     private byte[] tpmNonce;
-    private String token;
+    private RegnObject regnObject;
 
     public DaaRegister() {
     }
 
-    public DaaRegister(byte[] signedTpmNonce, byte[] p_EK, byte[] tpmNonce, String token) {
+    public DaaRegister(byte[] signedTpmNonce, byte[] tpmNonce, RegnObject regnObject) {
         this.signedTpmNonce = signedTpmNonce;
-        P_EK = p_EK;
         this.tpmNonce = tpmNonce;
-        this.token = token;
+        this.regnObject = regnObject;
     }
 
     public byte[] getSignedTpmNonce() {
@@ -24,14 +22,6 @@ public class DaaRegister {
         this.signedTpmNonce = signedTpmNonce;
     }
 
-    public byte[] getP_EK() {
-        return P_EK;
-    }
-
-    public void setP_EK(byte[] p_EK) {
-        P_EK = p_EK;
-    }
-
     public byte[] getTpmNonce() {
         return tpmNonce;
     }
@@ -40,11 +30,11 @@ public class DaaRegister {
         this.tpmNonce = tpmNonce;
     }
 
-    public String getToken() {
-        return token;
+    public RegnObject getRegnObject() {
+        return regnObject;
     }
 
-    public void setToken(String token) {
-        this.token = token;
+    public void setRegnObject(RegnObject regnObject) {
+        this.regnObject = regnObject;
     }
 }

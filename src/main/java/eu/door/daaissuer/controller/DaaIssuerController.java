@@ -4,6 +4,7 @@ import com.google.firebase.messaging.FirebaseMessagingException;
 import com.google.gson.Gson;
 import eu.door.daaissuer.model.DaaRegister;
 import eu.door.daaissuer.model.DaaUserHandle;
+import eu.door.daaissuer.model.IssueEvidenceReq;
 import eu.door.daaissuer.model.TestDto;
 import eu.door.daaissuer.service.DaaIssuerService;
 import eu.door.daaissuer.service.FirebaseMessagingService;
@@ -49,8 +50,6 @@ public class DaaIssuerController {
         }
     }
 
-    private int notificationCount = 0;
-    private DaaUserHandle daaUserHandle = null;
 
     @RequestMapping("/send-notification")
     @ResponseBody
@@ -60,21 +59,17 @@ public class DaaIssuerController {
 
         logger.info("sendNotification");
 
-        int n = notificationCount;
 
         String response = firebaseService.sendNotification(note, token);
         logger.info("response: " + response);
 
-        while(n == notificationCount){
-            TimeUnit.MILLISECONDS.sleep(100);
-        }
-
-        return ResponseEntity.ok(daaUserHandle);
+        return ResponseEntity.ok(token);
     }
 
 
     // set request timeout 5 seconds
     private static final int TIMEOUT = 5;
+    private int registerCount = 0;
 
     @RequestMapping("/daaRegister")
     @ResponseBody
@@ -83,9 +78,9 @@ public class DaaIssuerController {
 
         logger.info("daaRegister");
 
-        int n = notificationCount;
+        int n = registerCount;
 
-        String token = daaRegister.getToken();
+        String token = daaRegister.getRegnObject().getToken();
         Note note = new Note();
         note.setSubject("DAA Protocol Exchange");
 
@@ -102,16 +97,27 @@ public class DaaIssuerController {
         logger.info("response: " + response);
 
         int milliseconds = 0;
-        while(n == notificationCount){
+        while(n == registerCount){
             TimeUnit.MILLISECONDS.sleep(100);
             milliseconds += 100;
             if(milliseconds >= TIMEOUT*1000) {
-                return ResponseEntity.status(500).body("Failed to get response from the mobile.");
+                return ResponseEntity.status(500).body("Timeout: Failed to get response from the mobile.");
             }
         }
 
-        return ResponseEntity.ok(daaRegister.getToken());
+        return ResponseEntity.ok(daaRegister.getRegnObject().getToken());
     }
+
+    @RequestMapping("/issueEvidence")
+    @ResponseBody
+    public ResponseEntity<?> issueEvidence(@RequestBody IssueEvidenceReq issueEvidenceReq ) {
+        logger.info("issueEvidence");
+
+        //integration with core library
+
+        return ResponseEntity.ok(null);
+    }
+
 
     @RequestMapping("/daaUserHandle")
     @ResponseBody
@@ -119,8 +125,7 @@ public class DaaIssuerController {
 
         logger.info("daaUserHandle");
 
-        this.daaUserHandle = daaUserHandle;
-        notificationCount++;
+        registerCount++;
 
         return ResponseEntity.ok("OK");
     }
