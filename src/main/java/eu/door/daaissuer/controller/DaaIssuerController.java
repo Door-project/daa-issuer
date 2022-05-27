@@ -88,7 +88,7 @@ public class DaaIssuerController {
 
         Gson gson = new Gson();
         Map data = gson.fromJson(
-                gson.toJson(daaRegister),
+                gson.toJson(daaRegister.getRegnObject()),
                 Map.class
         );
         note.setData(data);
@@ -115,7 +115,7 @@ public class DaaIssuerController {
 
         //integration with core library
 
-        return ResponseEntity.ok(null);
+        return ResponseEntity.ok("OK");
     }
 
 
