@@ -85,7 +85,7 @@ public class DaaIssuerController {
 
         int n = notificationCount;
 
-        String token = daaRegister.getRegnObject().getToken();
+        String token = daaRegister.getToken();
         Note note = new Note();
         note.setSubject("DAA Protocol Exchange");
 
@@ -93,7 +93,7 @@ public class DaaIssuerController {
 
         Gson gson = new Gson();
         Map data = gson.fromJson(
-                gson.toJson(daaRegister.getRegnObject()),
+                gson.toJson(daaRegister),
                 Map.class
         );
         note.setData(data);
@@ -110,7 +110,7 @@ public class DaaIssuerController {
             }
         }
 
-        return ResponseEntity.ok(daaUserHandle);
+        return ResponseEntity.ok(daaRegister.getToken());
     }
 
     @RequestMapping("/daaUserHandle")
