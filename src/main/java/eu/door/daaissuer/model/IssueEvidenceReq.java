@@ -1,15 +1,17 @@
 package eu.door.daaissuer.model;
 
+import org.apache.commons.codec.binary.Base64;
+
 public class IssueEvidenceReq {
     private String daaHandle;
-    private byte[] signature;
+    private String signature;
     private IssueObject issueObject;
 
     public IssueEvidenceReq(){}
 
     public IssueEvidenceReq(String daaHandle, byte[] signature, IssueObject issueObject) {
         this.daaHandle = daaHandle;
-        this.signature = signature;
+        this.signature = Base64.encodeBase64String(signature);
         this.issueObject = issueObject;
     }
 
@@ -22,11 +24,11 @@ public class IssueEvidenceReq {
     }
 
     public byte[] getSignature() {
-        return signature;
+        return Base64.decodeBase64(signature);
     }
 
     public void setSignature(byte[] signature) {
-        this.signature = signature;
+        this.signature = Base64.encodeBase64String(signature);
     }
 
     public IssueObject getIssueObject() {
