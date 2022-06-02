@@ -83,7 +83,7 @@ public class DaaIssuerController {
 
         Gson gson = new Gson();
         Map data = gson.fromJson(
-                gson.toJson(daaRegister),
+                gson.toJson(new NotificationNote(daaRegister)),
                 Map.class
         );
         note.setData(data);
