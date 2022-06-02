@@ -2,10 +2,7 @@ package eu.door.daaissuer.controller;
 
 import com.google.firebase.messaging.FirebaseMessagingException;
 import com.google.gson.Gson;
-import eu.door.daaissuer.model.DaaRegister;
-import eu.door.daaissuer.model.DaaUserHandle;
-import eu.door.daaissuer.model.IssueEvidenceReq;
-import eu.door.daaissuer.model.TestDto;
+import eu.door.daaissuer.model.*;
 import eu.door.daaissuer.service.DaaIssuerService;
 import eu.door.daaissuer.service.FirebaseMessagingService;
 import eu.door.daaissuer.service.Note;
@@ -67,8 +64,8 @@ public class DaaIssuerController {
     }
 
 
-    // set request timeout 5 seconds
-    private static final int TIMEOUT = 5;
+    // set request timeout 10 seconds
+    private static final int TIMEOUT = 10;
     private int registerCount = 0;
 
     @RequestMapping("/daaRegister")
@@ -83,8 +80,6 @@ public class DaaIssuerController {
         String token = daaRegister.getRegnObject().getToken();
         Note note = new Note();
         note.setSubject("DAA Protocol Exchange");
-
-        //integration with core library: Notification data tbd
 
         Gson gson = new Gson();
         Map data = gson.fromJson(
@@ -108,6 +103,54 @@ public class DaaIssuerController {
         return ResponseEntity.ok(daaRegister.getRegnObject().getToken());
     }
 
+    @RequestMapping("/daaUserHandle")
+    @ResponseBody
+    public ResponseEntity<?> daaUserHandle( @RequestBody DaaUserHandle daaUserHandle ) {
+
+        logger.info("daaUserHandle");
+
+        registerCount++;
+
+        return ResponseEntity.ok("OK");
+    }
+
+    @RequestMapping("/getIssuerChallenge")
+    @ResponseBody
+    public ResponseEntity<?> getIssuerChallenge( @RequestBody GetIssuerChallengeReq getIssuerChallengeReq ) {
+
+        logger.info("getIssuerChallenge");
+
+        //String challenge = daaInterface.getIssuerChallenge(issreg);
+
+        return ResponseEntity.ok(
+                new getIssuerChallengeRes("challenge")
+        );
+    }
+
+    @RequestMapping("/getFullCredential")
+    @ResponseBody
+    public ResponseEntity<?> getFullCredential( @RequestBody GetFullCredentialReq getFullCredentialReq ) {
+
+        logger.info("getFullCredential");
+
+        // String fcre = daaInterface.sendChallengeResponse(challengeResponse);
+
+        return ResponseEntity.ok(
+                new GetFullCredentialRes("fcre")
+        );
+    }
+
+    @RequestMapping("/enabledFullCredential")
+    @ResponseBody
+    public ResponseEntity<?> enabledFullCredential( @RequestBody EnabledFullCredentialReq enabledFullCredentialReq ) {
+
+        logger.info("enabledFullCredential");
+
+        registerCount++;
+
+        return ResponseEntity.ok("OK");
+    }
+
     @RequestMapping("/issueEvidence")
     @ResponseBody
     public ResponseEntity<?> issueEvidence(@RequestBody IssueEvidenceReq issueEvidenceReq ) {
@@ -119,15 +162,7 @@ public class DaaIssuerController {
     }
 
 
-    @RequestMapping("/daaUserHandle")
-    @ResponseBody
-    public ResponseEntity<?> daaUserHandle( @RequestBody DaaUserHandle daaUserHandle ) {
 
-        logger.info("daaUserHandle");
 
-        registerCount++;
-
-        return ResponseEntity.ok("OK");
-    }
 
 }
