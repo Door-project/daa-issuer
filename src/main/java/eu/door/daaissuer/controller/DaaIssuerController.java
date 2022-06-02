@@ -83,7 +83,7 @@ public class DaaIssuerController {
 
         Gson gson = new Gson();
         Map data = gson.fromJson(
-                gson.toJson(daaRegister.getRegnObject()),
+                gson.toJson(daaRegister),
                 Map.class
         );
         note.setData(data);
@@ -123,7 +123,7 @@ public class DaaIssuerController {
         //String challenge = daaInterface.getIssuerChallenge(issreg);
 
         return ResponseEntity.ok(
-                new getIssuerChallengeRes("challenge")
+                new GetIssuerChallengeRes("challenge")
         );
     }
 

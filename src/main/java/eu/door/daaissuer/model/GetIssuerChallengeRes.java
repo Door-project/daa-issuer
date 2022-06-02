@@ -1,12 +1,12 @@
 package eu.door.daaissuer.model;
 
-public class getIssuerChallengeRes {
+public class GetIssuerChallengeRes {
     private String challenge;
 
-    public getIssuerChallengeRes() {
+    public GetIssuerChallengeRes() {
     }
 
-    public getIssuerChallengeRes(String challenge) {
+    public GetIssuerChallengeRes(String challenge) {
         this.challenge = challenge;
     }
 
