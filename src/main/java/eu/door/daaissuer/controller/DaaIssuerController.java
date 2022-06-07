@@ -113,7 +113,11 @@ public class DaaIssuerController {
 
         //integration with core library
 
-        return ResponseEntity.ok(issueEvidenceReq.getDaaSignature());
+        return ResponseEntity.ok(
+                new IssueEvidenceResponse(
+                        issueEvidenceReq.getDaaSignature(),
+                        issueEvidenceReq.getNonce())
+        );
     }
 
 
