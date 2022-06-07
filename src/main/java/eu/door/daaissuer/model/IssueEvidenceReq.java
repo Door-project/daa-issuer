@@ -1,39 +1,39 @@
 package eu.door.daaissuer.model;
 
 public class IssueEvidenceReq {
-    private String daaHandle;
-    private byte[] signature;
-    private IssueObject issueObject;
+    private String daaSignature;
+    private byte[] nonce;
+    private byte[] signedNonce;
 
     public IssueEvidenceReq(){}
 
-    public IssueEvidenceReq(String daaHandle, byte[] signature, IssueObject issueObject) {
-        this.daaHandle = daaHandle;
-        this.signature = signature;
-        this.issueObject = issueObject;
+    public IssueEvidenceReq(String daaSignature, byte[] nonce, byte[] signedNonce) {
+        this.daaSignature = daaSignature;
+        this.nonce = nonce;
+        this.signedNonce = signedNonce;
     }
 
-    public String getDaaHandle() {
-        return daaHandle;
+    public String getDaaSignature() {
+        return daaSignature;
     }
 
-    public void setDaaHandle(String daaHandle) {
-        this.daaHandle = daaHandle;
+    public void setDaaSignature(String daaSignature) {
+        this.daaSignature = daaSignature;
     }
 
-    public byte[] getSignature() {
-        return signature;
+    public byte[] getNonce() {
+        return nonce;
     }
 
-    public void setSignature(byte[] signature) {
-        this.signature = signature;
+    public void setNonce(byte[] nonce) {
+        this.nonce = nonce;
     }
 
-    public IssueObject getIssueObject() {
-        return issueObject;
+    public byte[] getSignedNonce() {
+        return signedNonce;
     }
 
-    public void setIssueObject(IssueObject issueObject) {
-        this.issueObject = issueObject;
+    public void setSignedNonce(byte[] signedNonce) {
+        this.signedNonce = signedNonce;
     }
 }

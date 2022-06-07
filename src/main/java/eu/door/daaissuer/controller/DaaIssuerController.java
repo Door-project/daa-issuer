@@ -3,7 +3,6 @@ package eu.door.daaissuer.controller;
 import com.google.firebase.messaging.FirebaseMessagingException;
 import com.google.gson.Gson;
 import eu.door.daaissuer.model.*;
-import eu.door.daaissuer.service.DaaIssuerService;
 import eu.door.daaissuer.service.FirebaseMessagingService;
 import eu.door.daaissuer.service.Note;
 import org.slf4j.Logger;
@@ -24,43 +23,10 @@ public class DaaIssuerController {
     private Logger logger = LoggerFactory.getLogger(DaaIssuerController.class);
 
 
-    @Autowired
-    private DaaIssuerService service;
-
     private final FirebaseMessagingService firebaseService;
-
 
     public DaaIssuerController(FirebaseMessagingService firebaseService) {
         this.firebaseService = firebaseService;
-    }
-
-    @PostMapping("/test")
-    public ResponseEntity<?> test(final @RequestBody TestDto testDto) {
-
-        try {
-            return ResponseEntity.ok(
-                    service.test(testDto)
-            );
-        } catch (Exception e) {
-            return ResponseEntity.badRequest()
-                    .body("Error");
-        }
-    }
-
-
-    @RequestMapping("/send-notification")
-    @ResponseBody
-    public ResponseEntity<?> sendNotification(@RequestBody Note note,
-                                              @RequestParam String token)
-            throws FirebaseMessagingException, InterruptedException {
-
-        logger.info("sendNotification");
-
-
-        String response = firebaseService.sendNotification(note, token);
-        logger.info("response: " + response);
-
-        return ResponseEntity.ok(token);
     }
 
 
@@ -101,17 +67,6 @@ public class DaaIssuerController {
         }
 
         return ResponseEntity.ok(daaRegister.getRegnObject().getToken());
-    }
-
-    @RequestMapping("/daaUserHandle")
-    @ResponseBody
-    public ResponseEntity<?> daaUserHandle( @RequestBody DaaUserHandle daaUserHandle ) {
-
-        logger.info("daaUserHandle");
-
-        registerCount++;
-
-        return ResponseEntity.ok("OK");
     }
 
     @RequestMapping("/getIssuerChallenge")
@@ -158,7 +113,7 @@ public class DaaIssuerController {
 
         //integration with core library
 
-        return ResponseEntity.ok("OK");
+        return ResponseEntity.ok(issueEvidenceReq.getDaaSignature());
     }
 
 
