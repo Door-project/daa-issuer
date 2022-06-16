@@ -5,6 +5,7 @@ import com.google.gson.Gson;
 import eu.door.daaissuer.model.*;
 import eu.door.daaissuer.service.FirebaseMessagingService;
 import eu.door.daaissuer.service.Note;
+import jni.DAAInterface;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.ResponseEntity;
@@ -23,6 +24,9 @@ public class DaaIssuerController {
 
 
     private final FirebaseMessagingService firebaseService;
+
+    private final DAAInterface daa = new DAAInterface();
+
 
     public DaaIssuerController(FirebaseMessagingService firebaseService) {
         this.firebaseService = firebaseService;
@@ -74,7 +78,7 @@ public class DaaIssuerController {
 
         logger.info("getIssuerChallenge");
 
-        //String challenge = daaInterface.getIssuerChallenge(issreg);
+        String challenge = daa.getIssuerChallenge(getIssuerChallengeReq.getIssreg());
 
         return ResponseEntity.ok(
                 new GetIssuerChallengeRes("challenge")
@@ -87,7 +91,7 @@ public class DaaIssuerController {
 
         logger.info("getFullCredential");
 
-        // String fcre = daaInterface.sendChallengeResponse(challengeResponse);
+        String fcre = daa.sendChallengeResponse(getFullCredentialReq.getChallengeResponse());
 
         return ResponseEntity.ok(
                 new GetFullCredentialRes("fcre")
