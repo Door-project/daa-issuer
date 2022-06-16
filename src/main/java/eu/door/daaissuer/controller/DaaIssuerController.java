@@ -2,7 +2,6 @@ package eu.door.daaissuer.controller;
 
 import com.google.firebase.messaging.FirebaseMessagingException;
 import com.google.gson.Gson;
-import eu.door.daaissuer.logging.LogOutputStream;
 import eu.door.daaissuer.logging.LoggingOutputStream;
 import eu.door.daaissuer.model.*;
 import eu.door.daaissuer.service.FirebaseMessagingService;
