@@ -3,6 +3,7 @@ package eu.door.daaissuer.controller;
 import com.google.firebase.messaging.FirebaseMessagingException;
 import com.google.gson.Gson;
 import eu.door.daaissuer.logging.LogOutputStream;
+import eu.door.daaissuer.logging.LoggingOutputStream;
 import eu.door.daaissuer.model.*;
 import eu.door.daaissuer.service.FirebaseMessagingService;
 import eu.door.daaissuer.service.Note;
@@ -25,7 +26,7 @@ import java.util.concurrent.TimeUnit;
 @RequestMapping("/api")
 public class DaaIssuerController {
 
-    private Logger logger = LogManager.getLogger(DaaIssuerController.class);
+    private Logger logger;
 
 
     private final FirebaseMessagingService firebaseService;
@@ -36,7 +37,8 @@ public class DaaIssuerController {
     public DaaIssuerController(FirebaseMessagingService firebaseService) {
         this.firebaseService = firebaseService;
 
-        System.setOut(new PrintStream(new LogOutputStream(logger, Level.INFO), true));
+        logger = LogManager.getLogger(DaaIssuerController.class);
+        System.setErr(new PrintStream(new LoggingOutputStream(logger, Level.ERROR)));
     }
 
 
