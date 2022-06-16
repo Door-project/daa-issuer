@@ -78,6 +78,7 @@ public class DaaIssuerController {
 
         logger.info("getIssuerChallenge");
 
+        daa.registerWalletPK(getIssuerChallengeReq.getWalletPublicKey().getBytes());
         String challenge = daa.getIssuerChallenge(getIssuerChallengeReq.getIssreg());
 
         return ResponseEntity.ok(
