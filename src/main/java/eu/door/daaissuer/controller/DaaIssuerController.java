@@ -36,7 +36,7 @@ public class DaaIssuerController {
     public DaaIssuerController(FirebaseMessagingService firebaseService) {
         this.firebaseService = firebaseService;
 
-        System.setOut(new PrintStream(new LogOutputStream(logger, Level.DEBUG), true));
+        System.setOut(new PrintStream(new LogOutputStream(logger, Level.INFO), true));
     }
 
 
