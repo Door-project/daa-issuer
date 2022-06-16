@@ -18,6 +18,8 @@ dependencies {
 
 	implementation 'com.google.firebase:firebase-admin:8.1.0'
 
+	implementation 'org.apache.logging.log4j:log4j-core:2.17.2'
+
 	implementation files('libs/jni-lib.jar')
 }
 

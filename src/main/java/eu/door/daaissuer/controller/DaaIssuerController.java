@@ -2,15 +2,20 @@ package eu.door.daaissuer.controller;
 
 import com.google.firebase.messaging.FirebaseMessagingException;
 import com.google.gson.Gson;
+import eu.door.daaissuer.logging.LogOutputStream;
 import eu.door.daaissuer.model.*;
 import eu.door.daaissuer.service.FirebaseMessagingService;
 import eu.door.daaissuer.service.Note;
 import jni.DAAInterface;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+
+import org.apache.logging.log4j.Level;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.io.PrintStream;
 import java.util.Map;
 import java.util.concurrent.TimeUnit;
 
@@ -20,7 +25,7 @@ import java.util.concurrent.TimeUnit;
 @RequestMapping("/api")
 public class DaaIssuerController {
 
-    private Logger logger = LoggerFactory.getLogger(DaaIssuerController.class);
+    private Logger logger = LogManager.getLogger(DaaIssuerController.class);
 
 
     private final FirebaseMessagingService firebaseService;
@@ -30,6 +35,8 @@ public class DaaIssuerController {
 
     public DaaIssuerController(FirebaseMessagingService firebaseService) {
         this.firebaseService = firebaseService;
+
+        System.setOut(new PrintStream(new LogOutputStream(logger, Level.DEBUG), true));
     }
 
 

@@ -44,5 +44,6 @@ public class DaaIssuerApplication {
 	public static void main(String[] args) {
 		registerIssuerPrivateKey();
 		SpringApplication.run(DaaIssuerApplication.class, args);
+
 	}
 }
