@@ -18,8 +18,7 @@ dependencies {
 
 	implementation 'com.google.firebase:firebase-admin:8.1.0'
 
-
-	implementation files('libs/daa_core_server-0.0.1.jar')
+	implementation files('libs/jni-lib.jar')
 }
 
 tasks.named('test') {
