@@ -130,7 +130,7 @@ public class DaaIssuerController {
                 issueEvidenceReq.getNonce()
                 ) != 1) {
             logger.info("Signature Verification Failed");
-            return ResponseEntity.badRequest("Signature Verification Failed");
+            return ResponseEntity.badRequest().body("Signature Verification Failed");
         }
 
         logger.info("Signature Verified");
