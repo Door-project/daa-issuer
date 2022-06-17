@@ -122,19 +122,21 @@ public class DaaIssuerController {
     @ResponseBody
     public ResponseEntity<?> issueEvidence(@RequestBody IssueEvidenceReq issueEvidenceReq ) {
         logger.info("issueEvidence");
-        System.out.println("sout: issueEvidence");
 
-        //integration with core library
+        if (daa.verifySignature(
+                issueEvidenceReq.getDaaSignature(),
+                issueEvidenceReq.getNonce()
+                ) != 1) {
+            logger.info("Signature Verification Failed");
+            return ResponseEntity.badRequest("Signature Verification Failed");
+        }
 
+        logger.info("Signature Verified");
         return ResponseEntity.ok(
                 new IssueEvidenceResponse(
                         issueEvidenceReq.getDaaSignature(),
                         issueEvidenceReq.getNonce())
         );
     }
-
-
-
-
 
 }
