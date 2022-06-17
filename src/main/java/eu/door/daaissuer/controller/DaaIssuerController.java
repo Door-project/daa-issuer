@@ -90,7 +90,7 @@ public class DaaIssuerController {
         String challenge = daa.getIssuerChallenge(getIssuerChallengeReq.getIssreg());
 
         return ResponseEntity.ok(
-                new GetIssuerChallengeRes("challenge")
+                new GetIssuerChallengeRes(challenge)
         );
     }
 
@@ -103,7 +103,7 @@ public class DaaIssuerController {
         String fcre = daa.sendChallengeResponse(getFullCredentialReq.getChallengeResponse());
 
         return ResponseEntity.ok(
-                new GetFullCredentialRes("fcre")
+                new GetFullCredentialRes(fcre)
         );
     }
 
