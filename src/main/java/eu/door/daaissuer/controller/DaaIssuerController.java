@@ -123,10 +123,10 @@ public class DaaIssuerController {
     public ResponseEntity<?> issueEvidence(@RequestBody IssueEvidenceReq issueEvidenceReq ) {
         logger.info("issueEvidence");
 
-        String resp = daa.DAASign(issueEvidenceReq.getNonce(),issueEvidenceReq.getSignedNonce());
+        //String resp = daa.DAASign(issueEvidenceReq.getNonce(),issueEvidenceReq.getSignedNonce());
 
         if (daa.verifySignature(
-                resp,
+                issueEvidenceReq.getDaaSignature(),
                 issueEvidenceReq.getNonce()
                 ) != 1) {
             logger.info("Signature Verification Failed");
