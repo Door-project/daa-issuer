@@ -36,8 +36,14 @@ public class DaaIssuerApplication {
 				"8zd2IIUVI/FwY+sWTyHhCxrHkfXKksSAmA==\n" +
 				"-----END EC PRIVATE KEY-----\n";
 
-		byte[] issuerPriv = ik_priv.getBytes();
+		String ik = "-----BEGIN PUBLIC KEY-----\n" +
+				"MFkwEwYHKoZIzj0CAQYIKoZIzj0DAQcDQgAE4CwPPzL9DS6n2zcDsV1hOadgL25Q\n" +
+				"hTF3PuomKkE3/ET4GcPMTkYi8zd2IIUVI/FwY+sWTyHhCxrHkfXKksSAmA==\n" +
+				"-----END PUBLIC KEY-----";
 
+		byte[] issuerPk = ik.getBytes();
+		daa.registerIssuerPK(issuerPk);
+		byte[] issuerPriv = ik_priv.getBytes();
 		daa.registerIssuer_priv(issuerPriv);
 	}
 
