@@ -1,16 +1,18 @@
 package eu.door.daaissuer.model;
 
+import org.apache.commons.codec.binary.Base64;
+
 public class IssueEvidenceReq {
     private String daaSignature;
-    private byte[] nonce;
-    private byte[] signedNonce;
+    private String issueObject;
+    private String signature;
 
     public IssueEvidenceReq(){}
 
-    public IssueEvidenceReq(String daaSignature, byte[] nonce, byte[] signedNonce) {
+    public IssueEvidenceReq(String daaSignature, byte[] issueObject, byte[] signature) {
         this.daaSignature = daaSignature;
-        this.nonce = nonce;
-        this.signedNonce = signedNonce;
+        this.issueObject = Base64.encodeBase64String(issueObject);
+        this.signature = Base64.encodeBase64String(signature);
     }
 
     public String getDaaSignature() {
@@ -21,19 +23,19 @@ public class IssueEvidenceReq {
         this.daaSignature = daaSignature;
     }
 
-    public byte[] getNonce() {
-        return nonce;
+    public byte[] getIssueObject() {
+        return Base64.decodeBase64(issueObject);
     }
 
-    public void setNonce(byte[] nonce) {
-        this.nonce = nonce;
+    public void setIssueObject(byte[] issueObject) {
+        this.issueObject = Base64.encodeBase64String(issueObject);
     }
 
-    public byte[] getSignedNonce() {
-        return signedNonce;
+    public byte[] getSignature() {
+        return Base64.decodeBase64(signature);
     }
 
-    public void setSignedNonce(byte[] signedNonce) {
-        this.signedNonce = signedNonce;
+    public void setSignature(byte[] signature) {
+        this.signature = Base64.encodeBase64String(signature);
     }
 }

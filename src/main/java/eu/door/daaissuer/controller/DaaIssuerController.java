@@ -125,7 +125,7 @@ public class DaaIssuerController {
 
         if (daa.verifySignature(
                 issueEvidenceReq.getDaaSignature(),
-                issueEvidenceReq.getNonce()
+                issueEvidenceReq.getIssueObject()
                 ) != 1) {
             logger.info("Signature Verification Failed");
             return ResponseEntity.badRequest().body("Signature Verification Failed");
@@ -135,7 +135,7 @@ public class DaaIssuerController {
         return ResponseEntity.ok(
                 new IssueEvidenceResponse(
                         issueEvidenceReq.getDaaSignature(),
-                        issueEvidenceReq.getNonce())
+                        issueEvidenceReq.getIssueObject())
         );
     }
 
