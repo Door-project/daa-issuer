@@ -3,13 +3,13 @@ package eu.door.daaissuer.model;
 import org.apache.commons.codec.binary.Base64;
 
 public class RegnObject {
-    private String P_EK;
-    private String tpmNonce;
+    private byte[] P_EK;
+    private byte[] tpmNonce;
     private String token;
 
     public RegnObject(byte[] p_EK, byte[] tpmNonce, String token) {
-        P_EK = Base64.encodeBase64String(p_EK);
-        this.tpmNonce = Base64.encodeBase64String(tpmNonce);
+        P_EK = p_EK;
+        this.tpmNonce = tpmNonce;
         this.token = token;
     }
 
@@ -17,11 +17,11 @@ public class RegnObject {
     }
 
     public byte[] getP_EK() {
-        return Base64.decodeBase64(P_EK);
+        return P_EK;
     }
 
     public void setP_EK(byte[] p_EK) {
-        P_EK = Base64.encodeBase64String(p_EK);
+        P_EK = p_EK;
     }
 
     public byte[] getTpmNonce() {
@@ -29,7 +29,7 @@ public class RegnObject {
     }
 
     public void setTpmNonce(byte[] tpmNonce) {
-        this.tpmNonce = Base64.encodeBase64String(tpmNonce);
+        this.tpmNonce = tpmNonce;
     }
 
     public String getToken() {
