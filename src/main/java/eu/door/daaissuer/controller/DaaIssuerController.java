@@ -12,6 +12,7 @@ import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -77,7 +78,7 @@ public class DaaIssuerController {
             }
         }
 
-        return ResponseEntity.ok(daaRegister.getRegnObject().getToken());
+        return ResponseEntity.ok(HttpStatus.OK);
     }
 
     @RequestMapping("/getIssuerChallenge")
@@ -120,12 +121,12 @@ public class DaaIssuerController {
 
     @RequestMapping("/issueEvidence")
     @ResponseBody
-    public ResponseEntity<?> issueEvidence(@RequestBody IssueEvidenceReq issueEvidenceReq ) {
+    public ResponseEntity<?> issueEvidence(@RequestBody IssueObject issueObject) {
         logger.info("issueEvidence");
 
         if (daa.verifySignature(
-                issueEvidenceReq.getDaaSignature(),
-                issueEvidenceReq.getIssueObject()
+                issueObject.getDaaSignature(),
+                issueObject.getTpmNonce()
                 ) != 1) {
             logger.info("Signature Verification Failed");
             return ResponseEntity.badRequest().body("Signature Verification Failed");
@@ -134,8 +135,8 @@ public class DaaIssuerController {
         logger.info("Signature Verified");
         return ResponseEntity.ok(
                 new IssueEvidenceResponse(
-                        issueEvidenceReq.getDaaSignature(),
-                        issueEvidenceReq.getIssueObject())
+                        issueObject.getDaaSignature(),
+                        issueObject.getTpmNonce())
         );
     }
 
