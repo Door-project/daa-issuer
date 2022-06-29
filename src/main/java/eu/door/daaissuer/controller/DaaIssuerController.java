@@ -88,6 +88,13 @@ public class DaaIssuerController {
         logger.info("getIssuerChallenge");
 
         daa.registerWalletPK(getIssuerChallengeReq.getWalletPublicKey().getBytes());
+
+        try {
+            TimeUnit.MILLISECONDS.sleep(2000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+
         String challenge = daa.getIssuerChallenge(getIssuerChallengeReq.getIssreg());
 
         return ResponseEntity.ok(
