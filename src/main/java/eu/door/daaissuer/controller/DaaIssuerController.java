@@ -120,7 +120,7 @@ public class DaaIssuerController {
 
     @RequestMapping("/issueEvidence")
     @ResponseBody
-    public ResponseEntity<?> issueEvidence(@RequestBody IssueEvidenceReq issueEvidenceReq ) {
+    public ResponseEntity<?> issueEvidence(@RequestBody IssueObject issueEvidenceReq ) {
         logger.info("issueEvidence");
 
         if (daa.verifySignature(
@@ -133,7 +133,7 @@ public class DaaIssuerController {
 
         logger.info("Signature Verified");
         return ResponseEntity.ok(
-                new IssueEvidenceResponse(
+                new EvidenceObject(
                         issueEvidenceReq.getDaaSignature(),
                         issueEvidenceReq.getNonce())
         );

@@ -1,14 +1,16 @@
 package eu.door.daaissuer.model;
 
-public class IssueEvidenceResponse {
+public class IssueObject {
     private String daaSignature;
     private byte[] nonce;
+    private byte[] signedNonce;
 
-    public IssueEvidenceResponse(){}
+    public IssueObject(){}
 
-    public IssueEvidenceResponse(String daaSignature, byte[] nonce) {
+    public IssueObject(String daaSignature, byte[] nonce, byte[] signedNonce) {
         this.daaSignature = daaSignature;
         this.nonce = nonce;
+        this.signedNonce = signedNonce;
     }
 
     public String getDaaSignature() {
@@ -25,5 +27,13 @@ public class IssueEvidenceResponse {
 
     public void setNonce(byte[] nonce) {
         this.nonce = nonce;
+    }
+
+    public byte[] getSignedNonce() {
+        return signedNonce;
+    }
+
+    public void setSignedNonce(byte[] signedNonce) {
+        this.signedNonce = signedNonce;
     }
 }
