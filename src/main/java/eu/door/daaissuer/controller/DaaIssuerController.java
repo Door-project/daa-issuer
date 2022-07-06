@@ -12,6 +12,7 @@ import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -77,7 +78,7 @@ public class DaaIssuerController {
             }
         }
 
-        return ResponseEntity.ok(daaRegister.getRegnObject().getToken());
+        return ResponseEntity.ok(HttpStatus.OK);
     }
 
     @RequestMapping("/getIssuerChallenge")
