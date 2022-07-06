@@ -128,12 +128,12 @@ public class DaaIssuerController {
 
     @RequestMapping("/issueEvidence")
     @ResponseBody
-    public ResponseEntity<?> issueEvidence(@RequestBody IssueObject issueEvidenceReq ) {
+    public ResponseEntity<?> issueEvidence(@RequestBody IssueObject issueObject ) {
         logger.info("issueEvidence");
 
         if (daa.verifySignature(
-                issueEvidenceReq.getDaaSignature(),
-                issueEvidenceReq.getNonce()
+                issueObject.getDaaSignature(),
+                issueObject.getNonce()
                 ) != 1) {
             logger.info("Signature Verification Failed");
             return ResponseEntity.badRequest().body("Signature Verification Failed");
@@ -142,8 +142,8 @@ public class DaaIssuerController {
         logger.info("Signature Verified");
         return ResponseEntity.ok(
                 new EvidenceObject(
-                        issueEvidenceReq.getDaaSignature(),
-                        issueEvidenceReq.getNonce())
+                        issueObject.getDaaSignature(),
+                        issueObject.getNonce())
         );
     }
 
