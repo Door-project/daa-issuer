@@ -1,9 +1,6 @@
 package eu.door.daaissuer.service;
 
-import com.google.firebase.messaging.FirebaseMessaging;
-import com.google.firebase.messaging.FirebaseMessagingException;
-import com.google.firebase.messaging.Message;
-import com.google.firebase.messaging.Notification;
+import com.google.firebase.messaging.*;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -17,18 +14,11 @@ public class FirebaseMessagingService {
 
 
     public String sendNotification(Note note, String token) throws FirebaseMessagingException {
-
-        Notification notification = Notification
-                .builder()
-                .setTitle(note.getSubject())
-                .setBody(note.getContent())
-                .build();
-
         Message message = Message
                 .builder()
                 .setToken(token)
-                .setNotification(notification)
                 .putAllData(note.getData())
+                .setAndroidConfig(AndroidConfig.builder().setPriority(AndroidConfig.Priority.HIGH).build())
                 .build();
 
         return firebaseMessaging.send(message);
